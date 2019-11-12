@@ -1,9 +1,11 @@
 from fpdf import FPDF
+import json
 
-pdf = FPDF(unit='in')
+pdf = FPDF()
 pdf.add_page()
 
 pdf.set_font('Arial', size= 12)
+ratio=1262./297
 
 def make_table(data):
     
@@ -12,11 +14,27 @@ def make_table(data):
     col_widths = epw/4
 
     th = pdf.font_size
+    
+#     list_of_values = ['ratio*pdf.get_x()', 'ratio*pdf.get_y()', 'pdf.w', 'pdf.h', 'item']
+    table_dict = {}
     for row in data:
-        for datum in row:
-            pdf.cell(col_widths, th, str(datum), border=1)
+        for item in row:
+                table_dict['table'] = []
+                table_dict['table'].append({
+                        'x': ratio*pdf.get_x(),
+                        'y': ratio*pdf.get_y(),
+                        'w': pdf.w,
+                        'h': pdf.h,
+                        'text': item
+                })
+
+                with open('data.json', 'w') as outfile:
+                        json.dump(table_dict, outfile, indent=4)
+            
+                pdf.cell(col_widths, th, str(item), border=1)
         
         pdf.ln(th)
+        
 
 
 data = [['Abv', 45, 23, 52.00],
@@ -47,7 +65,7 @@ epe munere ea vis, te tale tempor sit. An sed debet ocurreret adversarium, ne en
 im docendi mandamus sea.
 """
 
-make_paragraph(paragraph= dummy_text)
+# make_paragraph(paragraph= dummy_text)
 
 pdf.output('simple_inv.pdf','F')
 
