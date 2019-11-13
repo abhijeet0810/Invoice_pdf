@@ -19,7 +19,6 @@ def make_table(data,x,y):
     x_cord = pdf.set_x(x)
     y_cord = pdf.set_y(y)
     
-#     list_of_values = ['ratio*pdf.get_x()', 'ratio*pdf.get_y()', 'pdf.w', 'pdf.h', 'item']
     global_dict['table'] = []
     for row in data:
         for item in row:
@@ -38,10 +37,6 @@ def make_table(data,x,y):
         
         pdf.ln(th)
 
-        
-        
-
-
 data = [['Abv', 45, 23, 52.00],
         ['Dfc', 55, 21, 99.23],
         ['Ina', 15, 26, 87.89],
@@ -51,34 +46,29 @@ data = [['Abv', 45, 23, 52.00],
 
 make_table(data=data, x=1 ,y=140 )
 
-# def make_address():
-#         epw = pdf.w - 2*pdf.l_margin
+def make_address(address, x,y):
 
-#     col_widths = epw/4
+        #Coordiante values
+        x_cord = pdf.set_x(x)
+        y_cord = pdf.set_y(y)
 
-#     th = pdf.font_size
-    
-# #     list_of_values = ['ratio*pdf.get_x()', 'ratio*pdf.get_y()', 'pdf.w', 'pdf.h', 'item']
-#     global_dict = {}
-#     for row in data:
-#             print (data)
-#             for item in row:
-#                 global_dict['table'] = []
-#                 global_dict['table'].append({
-#                         'x': ratio*pdf.get_x(),
-#                         'y': ratio*pdf.get_y(),
-#                         'w': pdf.w,
-#                         'h': pdf.h,
-#                         'text': item
-#                 })
+        global_dict['address'] = []
+        global_dict['address'].append({
+                        'x': ratio*pdf.get_x(),
+                        'y': ratio*pdf.get_y(),
+                        'w': pdf.w,
+                        'h': pdf.h,
+                        'text': address
+                })
+        with open('data.json', 'w') as outfile:
+                json.dump(global_dict, outfile, indent=4)
+ 
+        pdf.multi_cell(epw/4, 5, address, border=1)
+        pdf.ln(0.5)
 
-#                 with open('data.json', 'w') as outfile:
-#                         json.dump(global_dict, outfile, indent=4)
-            
-#                 pdf.cell(col_widths, th, str(item), border=1)
-        
-#                 pdf.ln(th)
+address= """Address"""
 
+make_address(address=address, x= 50, y=50)
 
 def make_paragraph(paragraph, x, y):
 
