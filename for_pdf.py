@@ -3,24 +3,27 @@ import json
 
 pdf = FPDF()
 pdf.add_page()
+epw = pdf.w - 2*pdf.l_margin
 
 pdf.set_font('Arial', size= 12)
 ratio=1262./297
+global_dict = {}
 
-def make_table(data):
-    
-    epw = pdf.w - 2*pdf.l_margin
+def make_table(data,x,y):
 
     col_widths = epw/4
 
     th = pdf.font_size
     
+    #Coordiante values
+    x_cord = pdf.set_x(x)
+    y_cord = pdf.set_y(y)
+    
 #     list_of_values = ['ratio*pdf.get_x()', 'ratio*pdf.get_y()', 'pdf.w', 'pdf.h', 'item']
-    table_dict = {}
-    table_dict['table'] = []
+    global_dict['table'] = []
     for row in data:
         for item in row:
-                table_dict['table'].append({
+                global_dict['table'].append({
                         'x': ratio*pdf.get_x(),
                         'y': ratio*pdf.get_y(),
                         'w': pdf.w,
@@ -29,7 +32,7 @@ def make_table(data):
                 })
                 with open('data.json', 'w') as outfile:
 
-                        json.dump(table_dict, outfile, indent=4)
+                        json.dump(global_dict, outfile, indent=4)
             
                 pdf.cell(col_widths, th, str(item), border=1)
         
@@ -46,7 +49,7 @@ data = [['Abv', 45, 23, 52.00],
         ['Kjut', 95, 416, 12.9]
         ]
 
-make_table(data=data)
+make_table(data=data, x=1 ,y=140 )
 
 # def make_address():
 #         epw = pdf.w - 2*pdf.l_margin
@@ -56,12 +59,12 @@ make_table(data=data)
 #     th = pdf.font_size
     
 # #     list_of_values = ['ratio*pdf.get_x()', 'ratio*pdf.get_y()', 'pdf.w', 'pdf.h', 'item']
-#     table_dict = {}
+#     global_dict = {}
 #     for row in data:
 #             print (data)
 #             for item in row:
-#                 table_dict['table'] = []
-#                 table_dict['table'].append({
+#                 global_dict['table'] = []
+#                 global_dict['table'].append({
 #                         'x': ratio*pdf.get_x(),
 #                         'y': ratio*pdf.get_y(),
 #                         'w': pdf.w,
@@ -70,21 +73,34 @@ make_table(data=data)
 #                 })
 
 #                 with open('data.json', 'w') as outfile:
-#                         json.dump(table_dict, outfile, indent=4)
+#                         json.dump(global_dict, outfile, indent=4)
             
 #                 pdf.cell(col_widths, th, str(item), border=1)
         
 #                 pdf.ln(th)
 
 
-def make_paragraph(paragraph):
+def make_paragraph(paragraph, x, y):
 
-        epw = pdf.w - 2*pdf.l_margin
+        #Coordiante values
+        x_cord = pdf.set_x(x)
+        y_cord = pdf.set_y(y)
 
-        pdf.multi_cell(epw, 0.15, paragraph, border=1)
+        global_dict['paragraph'] = []
+        global_dict['paragraph'].append({
+                        'x': ratio*pdf.get_x(),
+                        'y': ratio*pdf.get_y(),
+                        'w': pdf.w,
+                        'h': pdf.h,
+                        'text': text
+                })
+        with open('data.json', 'w') as outfile:
+                json.dump(global_dict, outfile, indent=4)
+ 
+        pdf.multi_cell(epw, 5, paragraph, border=1)
         pdf.ln(0.5)
 
-dummy_text= """Lorem ipsum dolor sit amet, vel ne quando dissentias. Ne his opo\
+text= """Lorem ipsum dolor sit amet, vel ne quando dissentias. Ne his opo\
 rteat expetendis. Ei tantas explicari quo, sea vidit minimum menandri ea. His ca\
 se errem dicam ex, mel eruditi tibique delicatissimi ut. At mea wisi dolorum con\
 tentiones, in malis vitae viderer mel.
@@ -96,6 +112,6 @@ epe munere ea vis, te tale tempor sit. An sed debet ocurreret adversarium, ne en
 im docendi mandamus sea.
 """
 
-# make_paragraph(paragraph= dummy_text)
+make_paragraph(paragraph= text, x=1 ,y=190 )
 
 pdf.output('simple_inv.pdf','F')
