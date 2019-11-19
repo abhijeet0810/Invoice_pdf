@@ -1,0 +1,20 @@
+type: page
+data:
+    - type: column
+      data:
+        - type: paragraph
+          text: "Column 1 Para 1 text Lorem ipsum dolor sit amet."
+
+        - type: paragraph
+          text: "Column 1 Para 2 text Ei tantas explicari quo, sea vidit minimum menandri ea."
+      
+    - type: column
+      data:
+        - type: paragraph
+          text: "Column 2 Para 1 text Fusce vitae consequat mi. Cras aliquet non eros scelerisque porta."
+
+        - type: paragraph
+          text: "Column 2 Para 2 Vel ne quando dissentias. Ne his oporteat expetendis.vel ne quando dissentias. Ne his oporteat expetendis.."
+
+        - type: paragraph
+          text: "Column 2 Para 3 Cras aliquet non eros scelerisque porta."
