@@ -1,0 +1,41 @@
+type: page
+data:
+    - type: title
+      data:
+        text: "Company Name"
+      
+    - type: column
+      data:
+        - type: table
+          data:
+            - Item: Apple
+              Amount: 12
+              Unit: 1
+              Price: 56
+
+            - Item: Juice
+              Amount: 5
+              Unit: 2
+              Price: 47
+              
+            - Item: Jam
+              Amount: 8
+              Unit: 4
+              Price: 66
+              
+            - Item: Coffee
+              Amount: 5
+              Unit: 7
+              Price: 58
+        
+        - type: table
+          data:
+            - Item: Jam
+              Amount: 8
+              Unit: 4
+              Price: 66
+              
+            - Item: Coffee
+              Amount: 5
+              Unit: 7
+              Price: 58 

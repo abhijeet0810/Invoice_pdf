@@ -1,0 +1,20 @@
+type: page
+data:
+    - type: title
+      data:
+        text: "Company Name"
+
+    - type: column
+      data:
+        - type: paragraph
+          text: "Lorem ipsum dolor sit amet."
+      
+    - type: column
+      data:
+        - type: paragraph
+          text: "Lorem ipsum dolor sit amet."
+          
+    - type: column
+      data:
+        - type: paragraph
+          text: "Lorem ipsum dolor sit amet." 
